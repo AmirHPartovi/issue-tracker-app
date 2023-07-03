@@ -1,6 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
 import IssuesList from "./components/IssuesList";
 import Labels from "./components/Labels";
+import Status from "./components/Status";
 import { Grid, Typography,Box } from "@mui/material";
 import { useState } from "react";
 
@@ -25,6 +25,7 @@ import { useState } from "react";
 
 function App() {
   const [selectedLabel , setSelectedLabel]=useState('')
+  const [status,setStatus]=useState('')
   return (
     <>
     <Box>
@@ -39,7 +40,7 @@ function App() {
         <Grid
         item
         md={6}>
-        <IssuesList selectedLabel={selectedLabel}setSelectedLabel={setSelectedLabel}/>
+        <IssuesList selectedLabel={selectedLabel}setSelectedLabel={setSelectedLabel}status={status}/>
         </Grid>
         <Grid
         item
@@ -48,6 +49,10 @@ function App() {
             Labels
           </Typography>
           <Labels selectedLabel={selectedLabel}  setSelectedLabel={setSelectedLabel}/>
+          <Typography variant="h2">
+            Status
+          </Typography>
+            <Status status={status}setStatus={setStatus}/>
         </Grid>
     </Grid>
     </>

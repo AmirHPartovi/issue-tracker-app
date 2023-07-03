@@ -6,13 +6,15 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-const IssuesList = ({selectedLabel,setSelectedLabel}) => {
+const IssuesList = ({selectedLabel,setSelectedLabel,status}) => {
 
     const issuesQuery = useQuery(
-        ["issues"],
+        ["issues",{selectedLabel , status}],
         ()=>{
-            return fetch('https://ui.dev/api/courses/react-query/issues')
-            .then(res => res.json())
+          const statusString = status ? `&status=${status}`:''
+          const labelString = selectedLabel ? `labels[]=${selectedLabel}`:''
+          return fetch(`https://ui.dev/api/courses/react-query/issues?${labelString}${statusString}`)
+          .then(res => res.json())
         }
         )
         
